@@ -1,0 +1,165 @@
+.flashcard {
+    height: 100%;
+    background-color: white;
+    word-wrap: break-word;
+    text-align: center;
+    font-size: x-large;
+    margin: 0;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) */
+}
+
+.cardBackground {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(201, 201, 201);
+    z-index: -1;
+}
+
+.card {
+    background-color: white;
+    position: absolute;
+    right: 10%;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+.cardHolder {
+    border-radius: 8px;
+    border: 2px;
+    position: fixed;
+    background-color: white;
+    text-align: center;
+    left: 35%;
+    right: 35%;
+    top: 30%;
+    z-index: 1;
+    height:30%;
+    width:30%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.cardButtonDelete {
+    position: absolute;
+    bottom: 0px;
+    left: 10%;
+    width: 30%;
+    height: 10%;
+    border: 0px;
+    background-color: white;
+}
+
+.cardButtonDelete:hover{
+    background-color: red;
+    color: white;
+}
+
+.cardButtonEdit {
+    position: absolute;
+    bottom: 0px;
+    right: 10%;
+    width: 30%;
+    border: 0px;
+    height: 10%;
+    background-color: white;
+}
+
+.cardButtonEdit:hover{
+    background-color: rgba(206, 206, 206);
+}
+
+.cardButtonAdd {
+    position: absolute;
+    left: 40%;
+    bottom: 0px;
+    width: 20%;
+    border: 0px;
+    height: 10%;
+    background-color: white;
+}
+
+.cardButtonAdd:hover{
+    background-color: rgba(206, 206, 206);
+}
+
+.mainEditOverlay {
+    left: 0%;
+    top: 0%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.mainEditModal {
+    position: fixed;
+    background-color: white;
+    text-align: center;
+    left: 31%;
+    top: 30%;
+    z-index: 1;
+    height:30%;
+    width:40%;
+    font-size: large;
+}
+
+.modalUpperInput {
+    position: absolute;
+    width: 50%;
+    height: 30%;
+    top: 10%;
+    left: 30%;
+    border-radius: 8px;
+    word-wrap: break-word;
+}
+
+.modalLowerLabel {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    background-color: aquamarine;
+}
+
+.modalLowerInput {
+    position: absolute;
+    width: 50%;
+    height: 30%;
+    top: 45%;
+    left: 30%;
+    border-radius: 8px;
+    word-wrap: break-word;
+}
+
+.cardButtonLeft {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    height: 100%;
+    width: 10%;
+    float: left;
+    border: 0px;
+    background-color: white;
+}
+
+.cardButtonLeft:hover {
+    background-color: rgba(206, 206, 206, 0.8);
+}
+
+.cardButtonRight {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    height: 100%;
+    width: 10%;
+    float: right;
+    border: 0px;
+    background-color: white;
+}
+
+.cardButtonRight:hover {
+    background-color: rgba(206, 206, 206, 0.8);
+}

@@ -1,0 +1,21 @@
+* {    
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    margin: auto;
+    font-size: xx-large;
+    position: fixed;
+    width: 100%;
+    background-color:lightskyblue;
+    border: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    height: 8%;
+    padding-left: 1%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
