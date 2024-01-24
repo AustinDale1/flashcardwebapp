@@ -56,7 +56,7 @@ const Main = () => {
             body: JSON.stringify(sets[index])
         })
         setIsEdit(false);
-        getSet()
+        // getSet()
     }
 
     let handleChange = (value, index) => {
