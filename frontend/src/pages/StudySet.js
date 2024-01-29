@@ -41,16 +41,20 @@ const StudySet = () => {
         setIsAdd(!isAdd);
     }
 
-    const updateCard = async (e) => {
-        fetch(`/api/sets/${params.id}/cards/${cards[index].id}/update`, {
+    const updateCard = async (e, tester) => {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        await fetch(`/api/sets/${params.id}/cards/${cards[index].id}/update`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(cards[index])
+            body: JSON.stringify(formJson)
         })
+        getSet()
         setIsEdit(false);
-        // getSet()
     }
 
     const addCard = async (e) => {
@@ -58,7 +62,7 @@ const StudySet = () => {
         const form = e.target;
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
-        fetch(`/api/sets/${params.id}/cards/create`, {
+        await fetch(`/api/sets/${params.id}/cards/create`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -70,16 +74,7 @@ const StudySet = () => {
     }
 
     let deleteCard = async () => {
-        console.log(params.id + ' ' + cards[index].id + ' ' + index)
-        console.log('cards is ' + cards)
-        console.log(cards[1])
-        // let testArr = [...cards]
-        // testArr.splice(index, 1)
-        // console.log(testArr)
-        // console.log(testArr2)
-        // console.log('cards is ' + cards)
-        // console.log(cards[1])
-        fetch(`/api/sets/${params.id}/cards/${cards[index].id}/delete`, {
+        await fetch(`/api/sets/${params.id}/cards/${cards[index].id}/delete`, {
             method: 'DELETE',
             'headers': {
                 'Content-Type': 'application/json'
@@ -87,10 +82,10 @@ const StudySet = () => {
         })
         // setCards(testArr)
         getSet()
+        setIndex(index - 1)
     }
 
     useEffect(() => {
-        console.log('useEffect' + i)
         i++
         getSet()
     }, [])
@@ -101,28 +96,22 @@ const StudySet = () => {
         setCards(data)
     }
 
-    let handleFrontChange = (value) => {
-        let tempCards = cards
-        tempCards[index].front = value
-        setCards(tempCards)
-    }
-
-    let handleBackChange = (value) => {
-        let tempCards = cards
-        tempCards[index].back = value
-        setCards(tempCards)
-    }
-
     const EditModal = () => {
         return (
             <div className='mainEditOverlay' onClick={handleEdit}>
             <div className="mainEditModal" onClick={(e) => {e.stopPropagation();}}>
-                <form method="post" onSubmit={updateCard}>
-                    <label>
-                        <textarea name="front" onChange={(e) => {handleFrontChange(e.target.value)}} defaultValue={cards[index].front} className='modalUpperInput'></textarea>
+                <form method="post" onSubmit={(e) => {updateCard(e, 2)}}>
+                    <label style={{display:'none'}}>
+                        <textarea name="id" defaultValue={cards[index].id} className='modalUpperInput'></textarea>
+                    </label>
+                    <label style={{display:'none'}}>
+                        <textarea name="set" defaultValue={params.id} className='modalUpperInput'></textarea>
                     </label>
                     <label>
-                        <textarea name="back" onChange={(e) => {handleBackChange(e.target.value)}} defaultValue={cards[index].back} className='modalLowerInput'></textarea>
+                        <textarea name="front" defaultValue={cards[index].front} className='modalUpperInput'></textarea>
+                    </label>
+                    <label>
+                        <textarea name="back" defaultValue={cards[index].back} className='modalLowerInput'></textarea>
                     </label>
                     <button type="submit" className='modalButton'>Submit</button>
                 </form>

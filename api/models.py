@@ -7,7 +7,7 @@ class Set(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title[0:50]
+        return self.title
 
 class Card(models.Model):
     set = models.ForeignKey(Set, on_delete=models.CASCADE)

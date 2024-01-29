@@ -2,7 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Set, Card
-from .serializers import SetSerializer, CardSerializer
+from .serializers import SetSerializer, CardSerializer 
+from django.shortcuts import get_object_or_404                                        
 
 # Create your views here.
 
@@ -27,12 +28,12 @@ def getRoutes(request):
             'body': {'body': ""},
             'description': 'Creates new set with data sent in post request'
         },
-        # {
-        #     'Endpoint': '/sets/id/update/',
-        #     'method': 'PUT',
-        #     'body': {'body': ""},
-        #     'description': 'Creates an existing set with data sent in post request'
-        # },
+        {
+            'Endpoint': '/sets/id/update/',
+            'method': 'PUT',
+            'body': {'body': ""},
+            'description': 'Creates an existing set with data sent in post request'
+        },
         {
             'Endpoint': '/sets/id/delete/',
             'method': 'DELETE',

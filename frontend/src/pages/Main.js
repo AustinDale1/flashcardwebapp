@@ -24,21 +24,21 @@ const Main = () => {
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
         if(formJson.title.length > 0){
-            fetch(`/api/sets/create`, {
+            await fetch(`/api/sets/create`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formJson.title)
             })
-            // getSet()
+            await getSet()
         }
         setAdd(false)
     }   
 
     let deleteSet = async (index) => {
         console.log(index)
-        fetch(`/api/sets/${sets[index].id}/delete`, {
+        await fetch(`/api/sets/${sets[index].id}/delete`, {
             method: 'DELETE',
             'headers': {
                 'Content-Type': 'application/json'
@@ -48,21 +48,19 @@ const Main = () => {
     }
 
     let editSet = async (e, index) => {
-        fetch(`/api/sets/${sets[index].id}/update`, {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const formJson = Object.fromEntries(formData.entries());
+        await fetch(`/api/sets/${sets[index].id}/update`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(sets[index])
+            body: JSON.stringify(formJson)
         })
+        await getSet()
         setIsEdit(false);
-        // getSet()
-    }
-
-    let handleChange = (value, index) => {
-        let tempSets = sets
-        tempSets[index].title = value
-        setSets(tempSets)
     }
 
     const handleEdit = (index) => {
@@ -88,7 +86,7 @@ const Main = () => {
                 <div className="mainEditModal" onClick={(e) => {e.stopPropagation();}}>
                     <form method="post" onSubmit={(e) => {editSet(e, index)}}>
                         <label>
-                            Edit title<textarea name="back" onChange={(e) => {handleChange(e.target.value, index)}} defaultValue={sets[index].title} className='modalInput'></textarea>
+                            Edit title<textarea name="title" defaultValue={sets[index].title} className='modalInput'></textarea>
                         </label>
                         <button type="submit" className='modalButton'>Submit</button>
                     </form>
@@ -114,6 +112,7 @@ const Main = () => {
 
     return (
         <div>
+            {console.log('Test')}
             <button className='addButton' onClick={flipAdd}>+</button>
             <div className='setsList'>
                 { 
