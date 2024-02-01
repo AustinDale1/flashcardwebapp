@@ -18,6 +18,8 @@ const Main = () => {
         setSets(data)
     }
 
+    
+    //Grabs information from modal form, uses fetch, to send code to database, closes modal
     let addSet = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -47,6 +49,7 @@ const Main = () => {
         getSet()
     }
 
+    //Same logic as addSet
     let editSet = async (e, index) => {
         e.preventDefault();
         const form = e.target;
@@ -79,40 +82,42 @@ const Main = () => {
         setAdd(!add)
     }
 
+    //Displayed when state isEdit is true, form is sent to editSet
     const EditModal = (index) => {
         index = univIndex
         return (
             <div className='mainEditOverlay' onClick={flipEdit}>
-                <div className="mainEditModal" onClick={(e) => {e.stopPropagation();}}>
-                    <form method="post" onSubmit={(e) => {editSet(e, index)}}>
-                        <label>
-                            Edit title<textarea name="title" defaultValue={sets[index].title} className='modalInput'></textarea>
-                        </label>
-                        <button type="submit" className='modalButton'>Submit</button>
-                    </form>
-                </div>
+            <div className="mainEditModal" onClick={(e) => {e.stopPropagation();}}>
+                <form method="post" onSubmit={(e) => {editSet(e, index)}}>
+                    <label>
+                        Edit title<textarea name="title" defaultValue={sets[index].title} className='modalInput'></textarea>
+                    </label>
+                    <button type="submit" className='modalButton'>Submit</button>
+                </form>
+            </div>
             </div>
         )
     }
 
+    
+    //Displayed when state add is true, form is sent to addSet
     const AddModal = () => {
         return (
             <div className='mainEditOverlay' onClick={flipAdd}>
-                <div className="mainEditModal" onClick={(e) => {e.stopPropagation();}}>
-                    <form method="post" onSubmit={addSet}>
-                        <label>
-                            Card Title <textarea name="title" className='modalInput'></textarea>
-                        </label>
-                        <button type="submit" className='modalButton'>Submit</button>
-                    </form>
-                </div>
+            <div className="mainEditModal" onClick={(e) => {e.stopPropagation();}}>
+                <form method="post" onSubmit={addSet}>
+                    <label>
+                        Card Title <textarea name="title" className='modalInput'></textarea>
+                    </label>
+                    <button type="submit" className='modalButton'>Submit</button>
+                </form>
+            </div>
             </div>
         )
     }
 
     return (
         <div>
-            {console.log('Test')}
             <button className='addButton' onClick={flipAdd}>+</button>
             <div className='setsList'>
                 { 
@@ -128,8 +133,8 @@ const Main = () => {
                 ))
                 }
             </div>
-                {add && <AddModal />}
-                {isEdit && <EditModal index={univIndex}/>}
+            {add && <AddModal />}
+            {isEdit && <EditModal index={univIndex}/>}
         </div>
     )
 }

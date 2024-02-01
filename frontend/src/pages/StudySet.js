@@ -10,7 +10,6 @@ const StudySet = () => {
     const [index, setIndex] = useState(0);
     const [isEdit, setIsEdit] = useState(false);
     const [isAdd, setIsAdd] = useState(false);
-    let i = 0
 
     const handleFlip = () => {
         setFlip(!flip);
@@ -23,7 +22,7 @@ const StudySet = () => {
         } 
     }
 
-    const handleReturn = () => {
+    const handlePrevious = () => {
         if(index > 0){
           setIndex(index - 1);
           setFlip(true);
@@ -41,6 +40,7 @@ const StudySet = () => {
         setIsAdd(!isAdd);
     }
 
+    //Grabs information from modal form, uses fetch, to send code to database, closes modal
     const updateCard = async (e, tester) => {
         e.preventDefault();
         const form = e.target;
@@ -57,6 +57,7 @@ const StudySet = () => {
         setIsEdit(false);
     }
 
+    //Same logic as updateCard
     const addCard = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -80,13 +81,11 @@ const StudySet = () => {
                 'Content-Type': 'application/json'
             }
         })
-        // setCards(testArr)
         getSet()
         setIndex(index - 1)
     }
 
     useEffect(() => {
-        i++
         getSet()
     }, [])
 
@@ -96,6 +95,7 @@ const StudySet = () => {
         setCards(data)
     }
 
+    //Displayed when state isEdit is true, form is sent to updateCard
     const EditModal = () => {
         return (
             <div className='mainEditOverlay' onClick={handleEdit}>
@@ -120,6 +120,7 @@ const StudySet = () => {
         )
     }
 
+    //Same logic as addModal and mostly the same styling
     const AddModal = () => {
         return (
             <div className='mainEditOverlay' onClick={handleAdd}>
@@ -140,11 +141,10 @@ const StudySet = () => {
 
     return (
         <div className='cardBackground'>
-
             <div className='cardBackground'>
                 {cards.length > 0? (
                     <div className='cardHolder'>
-                        <button className="cardButtonLeft" onClick={handleReturn}>&larr;</button>
+                        <button className="cardButtonLeft" onClick={handlePrevious}>&larr;</button>
                         <div className='card' onClick={handleFlip}>
                             <FlashCard front={cards[index].front} back={cards[index].back} isFlipped={flip} />
                         </div>

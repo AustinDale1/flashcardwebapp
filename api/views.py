@@ -5,8 +5,6 @@ from .models import Set, Card
 from .serializers import SetSerializer, CardSerializer 
 from django.shortcuts import get_object_or_404                                        
 
-# Create your views here.
-
 @api_view(['GET'])
 def getRoutes(request):
     routes = [

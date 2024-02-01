@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styling/App.css'
 
+//There's not really a need for a header rn but it looked better
 const Header = () => {
     return (
         <div className='header'>
