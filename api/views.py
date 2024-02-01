@@ -82,14 +82,13 @@ def getSets(request):
 
 @api_view(['GET'])
 def getSet(request, pk):
-    set = Set.objects.get(id=pk)
+    set = get_object_or_404(Set, id=pk)
     serializer = SetSerializer(set, many=False)
     return Response(serializer.data)
 
 @api_view(['POST'])
 def createSet(request):
     data = request.data
-    print('data is ' + str(data))
     set = Set.objects.create(
         title=data
     )
@@ -123,11 +122,10 @@ def deleteCard(request, pk, cpk):
     card.delete()
     return Response('card was deleted!')
 
-
 @api_view(['GET'])
 def getCards(request, pk):
-    setTest = Set.objects.get(id=pk)
-    cards = Card.objects.filter(set=setTest)
+    set = Set.objects.get(id=pk)
+    cards = set.card_set.all()
     serializer = CardSerializer(cards, many=True)
     return Response(serializer.data)
 
